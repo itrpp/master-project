@@ -1,10 +1,10 @@
 {
-  "/api/system/connections": "pages/api/system/connections.js",
-  "/api/system/test-email": "pages/api/system/test-email.js",
   "/_document": "pages/_document.js",
+  "/api/system/connections": "pages/api/system/connections.js",
   "/_error": "pages/_error.js",
+  "/_app": "pages/_app.js",
+  "/api/system/test-email": "pages/api/system/test-email.js",
   "/api/version": "pages/api/version.js",
   "/": "pages/index.html",
-  "/_app": "pages/_app.js",
   "/404": "pages/404.html"
 }

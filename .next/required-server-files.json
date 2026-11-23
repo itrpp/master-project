@@ -99,7 +99,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\yan\\AppData\\Local\\Temp\\master-project-deploy-SgJeLD\\build",
+    "outputFileTracingRoot": "C:\\Users\\yan\\AppData\\Local\\Temp\\master-project-deploy-ktqcmz\\build",
     "experimental": {
       "useSkewCookie": false,
       "cacheLife": {
@@ -292,10 +292,10 @@
       "mysql2"
     ],
     "turbopack": {
-      "root": "C:\\Users\\yan\\AppData\\Local\\Temp\\master-project-deploy-SgJeLD\\build"
+      "root": "C:\\Users\\yan\\AppData\\Local\\Temp\\master-project-deploy-ktqcmz\\build"
     }
   },
-  "appDir": "C:\\Users\\yan\\AppData\\Local\\Temp\\master-project-deploy-SgJeLD\\build",
+  "appDir": "C:\\Users\\yan\\AppData\\Local\\Temp\\master-project-deploy-ktqcmz\\build",
   "relativeAppDir": "",
   "files": [
     ".next\\routes-manifest.json",
