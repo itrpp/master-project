@@ -1,8 +1,8 @@
 {
-  "target": "linux-x64",
+  "target": "win32-x64",
   "smokePath": "/",
   "pm2Name": "master-project",
-  "port": 3005,
+  "port": 3020,
   "buildEnv": {
     "DATABASE_URL": "mysql://build:build@127.0.0.1:1/build"
   }

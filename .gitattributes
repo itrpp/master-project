@@ -1,0 +1,5 @@
+# Source repo — normalize text to LF; keep lockfile / binaries intact
+* text=auto eol=lf
+*.{png,jpg,jpeg,gif,webp,ico,woff,woff2,ttf,eot} binary
+*.node binary
+package-lock.json text eol=lf

@@ -31,13 +31,30 @@ function die(msg) {
   process.exit(1);
 }
 
-function run(cmd, args, { shell = false, ...opts } = {}) {
-  const r = spawnSync(cmd, args, { stdio: "inherit", shell, ...opts });
-  if (r.status !== 0) die(`คำสั่งล้มเหลว: ${cmd} ${args.join(" ")}`);
+function run(cmd, args, { shell = false, quiet = false, ...opts } = {}) {
+  const r = spawnSync(cmd, args, {
+    stdio: quiet ? ["ignore", "ignore", "pipe"] : "inherit",
+    encoding: "utf8",
+    shell,
+    ...opts,
+  });
+  if (r.status !== 0) {
+    const err = String(r.stderr || r.stdout || "").trim();
+    die(`คำสั่งล้มเหลว: ${cmd} ${args.join(" ")}${err ? `\n${err}` : ""}`);
+  }
 }
 function capture(cmd, args, { shell = false, ...opts } = {}) {
   const r = spawnSync(cmd, args, { encoding: "utf8", shell, ...opts });
   return { ok: r.status === 0, text: (r.stdout || "").trim() };
+}
+
+/** git ใน worktree deploy — ปิด autocrlf เพื่อไม่ให้ Windows แปลง LF ทั้ง node_modules */
+function gitDeploy(args, cwd) {
+  run(
+    "git",
+    ["-c", "core.autocrlf=false", "-c", "core.safecrlf=false", "-c", "core.longpaths=true", ...args],
+    { cwd, quiet: true },
+  );
 }
 
 function walk(dir, { skip = () => false } = {}) {
@@ -302,6 +319,12 @@ const ecosystem = `module.exports = {
 fs.writeFileSync(path.join(SA, "ecosystem.config.cjs"), ecosystem);
 console.log(`  เขียน ecosystem.config.cjs (name=${PM2_NAME}, PORT=${PORT})`);
 
+// ป้องกัน Windows autocrlf แปลงไฟล์ทั้ง node_modules ตอน git add (สาเหตุที่ deploy พัง)
+fs.writeFileSync(
+  path.join(SA, ".gitattributes"),
+  "* -text\n",
+);
+
 fs.writeFileSync(
   path.join(SA, "DEPLOY.md"),
   `# ${NAME} — build สำเร็จรูปสำหรับ ${TARGET}
@@ -336,11 +359,12 @@ fs.cpSync(SA, D, { recursive: true });
 for (const f of walk(D, { skip: (p, e) => e.name === ".git" })) {
   if (path.basename(f) === ".DS_Store") fs.rmSync(f);
 }
-git(["add", "-f", "-A"], D);
+console.log("  กำลัง git add (ปิด autocrlf / longpaths — ไม่แสดง warning CRLF)");
+gitDeploy(["add", "-f", "-A"], D);
 const msgFile = path.join(WORK, "commit-msg.txt");
 fs.writeFileSync(msgFile, `build: standalone จาก ${SRC_BRANCH}@${SRC} (${TARGET})\n`);
-git(["commit", "-q", "-F", msgFile], D);
-git(["push", "-q", "-u", "origin", BRANCH], D);
+gitDeploy(["commit", "-q", "-F", msgFile], D);
+gitDeploy(["push", "-q", "-u", "origin", BRANCH], D);
 
 const head = capture("git", ["rev-parse", "--short", "HEAD"], { cwd: D }).text;
 step(`push แล้ว: ${BRANCH} @ ${head}`);
