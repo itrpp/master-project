@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@plugin '../config/theme';
+
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@source '../pages/**/*.{js,ts,jsx,tsx}';
+@source '../components/**/*.{js,ts,jsx,tsx}';
+
+@theme {
+  --font-sans: "Inter", "Prompt", sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --font-thai: "Prompt", "Sarabun", sans-serif;
+}
+
+nextjs-portal {
+  left: unset !important;
+  top: unset !important;
+}
