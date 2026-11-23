@@ -1,10 +1,4 @@
 {
-  "node_modules\\@heroui\\ripple\\dist\\chunk-UIQI3AYJ.mjs -> @heroui/dom-animation": {
-    "id": 8764,
-    "files": [
-      "static/chunks/764.1ee4ee6cfa58d6f6.js"
-    ]
-  },
   "node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
     "id": 1806,
     "files": [
