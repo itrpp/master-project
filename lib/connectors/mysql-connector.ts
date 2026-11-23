@@ -3,8 +3,6 @@ import type { ServiceConnectionResult, ServiceTargetId } from "@/types/connectio
 
 export type MySQLProfileKey =
   | "mysql_main"
-  | "mysql_egp"
-  | "mysql_purchase"
   | "mysql_inventory"
   | "mysql_gotowin";
 
@@ -40,32 +38,6 @@ export function getMySQLTargetSpecs(): MySQLTargetSpec[] {
       password: defaultPassword,
       database: (process.env.DB_NAME || "").trim(),
       envKeys: ["DB_HOST", "DB_PORT", "DB_USER", "DB_PASSWORD", "DB_NAME"],
-    },
-    {
-      id: "mysql_egp",
-      name: "MySQL — e-GP Database (EGP_DB_*)",
-      host: (process.env.EGP_DB_HOST || defaultHost).trim(),
-      port: envInt(process.env.EGP_DB_PORT, defaultPort),
-      user: (process.env.EGP_DB_USER || defaultUser).trim(),
-      password: process.env.EGP_DB_PASSWORD ?? defaultPassword,
-      database: (process.env.EGP_DB_NAME || "egp_db").trim(),
-      envKeys: ["EGP_DB_NAME", "EGP_DB_HOST", "DB_HOST", "DB_USER", "DB_PASSWORD"],
-    },
-    {
-      id: "mysql_purchase",
-      name: "MySQL — Purchase / BudgetPlan (PURCHASE_DB_*)",
-      host: (process.env.PURCHASE_DB_HOST || defaultHost).trim(),
-      port: envInt(process.env.PURCHASE_DB_PORT, defaultPort),
-      user: (process.env.PURCHASE_DB_USER || defaultUser).trim(),
-      password: process.env.PURCHASE_DB_PASSWORD ?? defaultPassword,
-      database: (process.env.PURCHASE_DB_NAME || "purchase_db").trim(),
-      envKeys: [
-        "PURCHASE_DB_HOST",
-        "PURCHASE_DB_PORT",
-        "PURCHASE_DB_USER",
-        "PURCHASE_DB_PASSWORD",
-        "PURCHASE_DB_NAME",
-      ],
     },
     {
       id: "mysql_inventory",

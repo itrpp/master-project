@@ -7,8 +7,6 @@ import { testSmtpConnection } from "./smtp-connector";
 export const ALL_SERVICE_TARGETS: ServiceTargetId[] = [
   "oracle",
   "mysql_main",
-  "mysql_egp",
-  "mysql_purchase",
   "mysql_inventory",
   "mysql_gotowin",
   "ldap",
@@ -22,8 +20,6 @@ export async function testSingleServiceConnection(
     case "oracle":
       return testOracleConnection();
     case "mysql_main":
-    case "mysql_egp":
-    case "mysql_purchase":
     case "mysql_inventory":
     case "mysql_gotowin":
       return testMySQLTarget(target);

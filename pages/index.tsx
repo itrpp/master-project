@@ -33,18 +33,6 @@ const INITIAL_TARGETS: Array<{
     engine: "MySQL / MariaDB",
   },
   {
-    id: "mysql_egp",
-    name: "MySQL — e-GP Database (EGP_DB_*)",
-    category: "database",
-    engine: "MySQL / MariaDB",
-  },
-  {
-    id: "mysql_purchase",
-    name: "MySQL — Purchase / BudgetPlan (PURCHASE_DB_*)",
-    category: "database",
-    engine: "MySQL / MariaDB",
-  },
-  {
     id: "mysql_inventory",
     name: "MySQL — Inventory Database (INVENTORY_DB_*)",
     category: "database",
@@ -547,7 +535,7 @@ export default function MasterProjectDiagnosticPage() {
                   <p className="font-bold text-slate-900">โครงสร้างไฟล์หลัก (Clean Architecture)</p>
                   <ul className="mt-1.5 list-disc space-y-1 pl-4 font-mono text-[11px] text-slate-600">
                     <li>
-                      <strong>lib/connectors/</strong> — โมดูลเชื่อมต่อ Oracle, MySQL (5 โปรไฟล์), LDAP, SMTP
+                      <strong>lib/connectors/</strong> — โมดูลเชื่อมต่อ Oracle, MySQL (3 โปรไฟล์), LDAP, SMTP
                     </li>
                     <li>
                       <strong>pages/api/system/connections.ts</strong> — API ตรวจสอบการเชื่อมต่อทั้งหมด

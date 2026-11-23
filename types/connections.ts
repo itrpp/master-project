@@ -1,8 +1,6 @@
 export type ServiceTargetId =
   | "oracle"
   | "mysql_main"
-  | "mysql_egp"
-  | "mysql_purchase"
   | "mysql_inventory"
   | "mysql_gotowin"
   | "ldap"
